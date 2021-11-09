@@ -14,6 +14,8 @@ desktop.ini
 /composer.phar
 assets/
 config/
+content-sample/
+themes/default/
 plugins/
 vendor/
 .htaccess
