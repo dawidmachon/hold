@@ -197,7 +197,7 @@
     findProperties();
 
     // iOS Safari will report window.innerWidth and .innerHeight as 0 unless a timeout is used here.
-    // TODO: figure out WHY innerWidth === 0
+    // TODO: not-me/figure out WHY innerWidth === 0
     setTimeout(function() {
       updateStyles();
     }, 1);
