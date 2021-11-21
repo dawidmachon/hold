@@ -42,6 +42,71 @@
 		});
 	};
 
+	// Dark - Light theme switch
+	var styleToggle = function() {
+
+		
+		if ( $.cookie('styleCookie') !== undefined ) {
+			if ( $.cookie('styleCookie') === 'style-light.css'  ) { 
+				
+				$('.js-style-toggle').attr('data-style', 'light');
+			} else  {
+				$('.js-style-toggle').attr('data-style', 'default');
+			}
+			$('#theme-switch').attr('href', twig_theme_url + '/css/' + $.cookie('styleCookie'));
+		} 
+
+
+		if ( $.cookie('btnActive') !== undefined ) $('.js-style-toggle').addClass($.cookie('btnActive'));
+		
+
+
+
+		// $('.js-style-toggle').on('click', function(){
+		$('body').on('click','.js-style-toggle',function(event){
+
+			
+
+			var data = $('.js-style-toggle').attr('data-style'), style = '', $this = $(this);
+
+			if ( data === 'default') {
+
+				// switch to light
+				style = 'style-light.css';
+				$this.attr('data-style', 'light');
+
+				// add class active to button
+				$.cookie('btnActive', 'active', { expires: 365, path: '/'});
+				$this.addClass($.cookie('btnActive'));
+				
+
+			} else {
+				// switch to dark color
+				style = 'style.css';
+				$this.attr('data-style', 'default');
+
+				// remove class active from button
+				$.removeCookie('btnActive', { path: '/' });
+				$(this).removeClass('active'); 
+
+				// switch to style
+				$.cookie('styleCookie', style, { expires: 365, path: '/'});
+
+			}
+
+			// switch to style 
+			$.cookie('styleCookie', style, { expires: 365, path: '/'});
+
+			// apply the new style
+			$('#theme-switch').attr('href', twig_theme_url + '/css/' + $.cookie('styleCookie'));
+				
+			
+			event.preventDefault();
+
+		});
+		
+	}
+
 	// Animations
 
 	var contentWayPoint = function() {
@@ -77,6 +142,7 @@
 		gotToNextSection();
 		loaderPage();
 		ScrollNext();
+		styleToggle();
 		
 		// Animate
 		contentWayPoint();
