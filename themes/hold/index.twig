@@ -53,8 +53,9 @@
 	<div id="fh5co-page" itemscope itemtype="http://schema.org/Person">
 		<nav id="fh5co-nav" role="navigation">
 			<ul>
-				<li class="animate-box fadeInUp animated"><a href="index.html" class="transition">Home</a></li> <!-- TODO: Make Nav dynamic and styled -->
-				<li class="animate-box fh5co-active fadeInUp animated"><a href="about.html" class="transition">Bio</a></li>
+				{% for page in pages(depthOffset=-1) if not page.hidden %} {# ? depthOffset=-1 need to be replaced with index for 'home' when dropdowns feature will be introduced.  #}
+				<li class="animate-box fadeInUp animated {% if page.url == current_page.url %} fh5co-active {% endif %}"><a href="{{ page.url }}" class="transition">{{ page.title }}</a></li> {# TODO: Make DropDown for Nav nested pages. #}
+				{% endfor %}
 			</ul>
 			<a class="style-toggle js-style-toggle" data-style="default" href="#" style="">
 				<span class="fh5co-circle"></span> <!-- TODO: Make this switch to work -->
